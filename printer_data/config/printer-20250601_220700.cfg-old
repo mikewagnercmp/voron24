@@ -1,4 +1,4 @@
-
+[include mainsail.cfg]
 
 # host MCU service is preinstalled and ready to use with:
 #[mcu CB1]
@@ -17,9 +17,7 @@
 [include GantryBrushClean.cfg]
 [include Macros.cfg]  #Print start and load/unload are all in here
 [include build_sheets.cfg]
-#[include mmu/base/*.cfg]
-#[include mmu/optional/client_macros.cfg]
-#[include mainsail.cfg] was planning on using this, but removing it for now. 
+
 ##--------------------------------------------------------------------
 #Global Settings
 ##--------------------------------------------------------------------
@@ -44,24 +42,21 @@ filename: ~/printer_data/config/save_variables.cfg
 ##	Obtain definition by "ls /dev/serial/by-id/*" then unplug to verify
 ##--------------------------------------------------------------------
 #serial: /dev/serial/by-id/YOU_DIDNT_CHANGE_ME_YET
-#canbus_uuid: 16b71de5c6ed  --old manta 8 that is fried
+canbus_uuid: 16b71de5c6ed
 #restart_method: command
 #
-
-canbus_uuid: f68b0125e6a0
 ##--------------------------------------------------------------------
 
 [printer]
 kinematics: corexy
 max_velocity: 320  
-max_accel: 4900    			#Max 4000
+max_accel: 4000    			#Max 4000
 max_z_velocity: 15 			#Max 15 for 12V TMC Drivers, can increase for 24V
 max_z_accel: 350
 square_corner_velocity: 5.0
 
-
 #####################################################################
-# 	Temperature sensors - not extruder or scanner
+# 	Temperature sensors
 #####################################################################
 
 [temperature_sensor MCU]
@@ -171,8 +166,8 @@ full_steps_per_rotation:200  #set to 400 for 0.9 degree stepper
 #position_max: 300
 
 ##	Uncomment for 350mm build
-position_endstop: 358
-position_max: 358
+position_endstop: 357
+position_max: 357
 
 ##--------------------------------------------------------------------
 homing_speed: 25  #Max 100
@@ -191,7 +186,6 @@ stealthchop_threshold: 0
 # 2A rated current, phase resistance 1.3 ohm, inductance 2.7mH
 # tuned with https://github.com/MakerBogans/docs/wiki/TMC-Driver-Tuning
 #Below are spectific to my these motors
-
 driver_TBL: 1
 driver_TOFF: 3
 driver_HSTRT: 2
@@ -207,9 +201,9 @@ driver_HEND: 3
 step_pin: PB8
 dir_pin: PB7
 enable_pin: !PE0
-rotation_distance: 40 #39.916 #40
+rotation_distance: 40
 gear_ratio: 80:16
-microsteps: 32
+microsteps: 16
 endstop_pin: probe:z_virtual_endstop
 ##  Z-position of nozzle (in mm) to z-endstop trigger point relative to print surface (Z0)
 ##  (+) value = endstop above Z0, (-) value = endstop below
@@ -239,25 +233,25 @@ uart_pin: PB9
 interpolate: False
 #run_current: 0.8
 run_current: 1
-sense_resistor: 0.110
+sense_resistor: 0.109
 stealthchop_threshold: 0
 #Stepper is a Model MS17hd6p4201-04
 # 2A rated current, phase resistance 1.3 ohm, inductance 2.7mH
 # tuned with https://github.com/MakerBogans/docs/wiki/TMC-Driver-Tuning
 #Below are spectific to my these motors
-#driver_TBL: 1
-#driver_TOFF: 3
-#driver_HSTRT: 2
-#driver_HEND: 3
+driver_TBL: 1
+driver_TOFF: 3
+driver_HSTRT: 2
+driver_HEND: 3
 
 ##	Z1 Stepper - Rear Left on Motor5
 [stepper_z1]
 step_pin: PG13
 dir_pin: !PG12
 enable_pin: !PG15
-rotation_distance: 40 #39.916 #40
+rotation_distance: 40
 gear_ratio: 80:16
-microsteps: 32
+microsteps: 16
 
 ##	Make sure to update below for your relevant driver (2208 or 2209)
 [tmc2209 stepper_z1]
@@ -265,25 +259,25 @@ uart_pin: PG14
 interpolate: False
 #run_current: 0.8
 run_current: 1
-sense_resistor: 0.110
+sense_resistor: 0.109
 stealthchop_threshold: 0
 #Stepper is a Model MS17hd6p4201-04
 # 2A rated current, phase resistance 1.3 ohm, inductance 2.7mH
 # tuned with https://github.com/MakerBogans/docs/wiki/TMC-Driver-Tuning
 #Below are spectific to my these motors
-#driver_TBL: 1
-#driver_TOFF: 3
-#driver_HSTRT: 2
-#driver_HEND: 3
+driver_TBL: 1
+driver_TOFF: 3
+driver_HSTRT: 2
+driver_HEND: 3
 
 ##	Z2 Stepper - Rear Right on Motor6
 [stepper_z2]
 step_pin: PG9
 dir_pin: PD7
 enable_pin: !PG11
-rotation_distance: 40 #39.916 #40
+rotation_distance: 40
 gear_ratio: 80:16
-microsteps: 32
+microsteps: 16
 
 ##	Make sure to update below for your relevant driver (2208 or 2209)
 [tmc2209 stepper_z2]
@@ -291,25 +285,25 @@ uart_pin: PG10
 interpolate: False
 #run_current: 0.8
 run_current: 1
-sense_resistor: 0.110
+sense_resistor: 0.109
 stealthchop_threshold: 0
 #Stepper is a Model MS17hd6p4201-04
 # 2A rated current, phase resistance 1.3 ohm, inductance 2.7mH
 # tuned with https://github.com/MakerBogans/docs/wiki/TMC-Driver-Tuning
 #Below are spectific to my these motors
-#driver_TBL: 1
-#driver_TOFF: 3
-#driver_HSTRT: 2
-#driver_HEND: 3
+driver_TBL: 1
+driver_TOFF: 3
+driver_HSTRT: 2
+driver_HEND: 3
 
 ##	Z3 Stepper - Front Right on Motor7
 [stepper_z3]
 step_pin: PD4
 dir_pin: !PD3
 enable_pin: !PD6
-rotation_distance: 40 #39.916 #40
+rotation_distance: 40
 gear_ratio: 80:16
-microsteps: 32
+microsteps: 16
 
 ##	Make sure to update below for your relevant driver (2208 or 2209)
 [tmc2209 stepper_z3]
@@ -317,16 +311,16 @@ uart_pin: PD5
 interpolate: False
 #run_current: 0.8
 run_current: 1
-sense_resistor: 0.110
+sense_resistor: 0.109
 stealthchop_threshold: 0
 #Stepper is a Model MS17hd6p4201-04
 # 2A rated current, phase resistance 1.3 ohm, inductance 2.7mH
 # tuned with https://github.com/MakerBogans/docs/wiki/TMC-Driver-Tuning
 #Below are spectific to my these motors
-#driver_TBL: 1
-#driver_TOFF: 3
-#driver_HSTRT: 2
-#driver_HEND: 3
+driver_TBL: 1
+driver_TOFF: 3
+driver_HSTRT: 2
+driver_HEND: 3
 
 #####################################################################
 # 	Filament Sensor
@@ -454,7 +448,7 @@ timeout: 1800
 ##	Location Definition step.
 home_xy_position:170,170
 speed:100
-z_hop:10  #10 for TAP
+z_hop:10
 #--------------------------------------------------------------------
 [quad_gantry_level]
 ##	Use QUAD_GANTRY_LEVEL to level a gantry.
@@ -512,7 +506,7 @@ aliases:
 
 
 #####################################################################
-# 	Probe - TAP CONFIG
+# 	Probe
 #####################################################################
 
 [probe]
@@ -532,7 +526,26 @@ samples_tolerance_retries: 3
 #*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
 #*#
 #*# [probe]
-#*# z_offset = -0.731
+#*# z_offset = -0.830
+#*#
+#*# [bed_mesh default]
+#*# version = 1
+#*# points =
+#*# 	-0.196250, -0.228750, -0.242500, -0.262500, -0.292500
+#*# 	-0.303750, -0.298750, -0.280000, -0.267500, -0.248750
+#*# 	-0.358750, -0.317500, -0.235000, -0.190000, -0.152500
+#*# 	-0.321250, -0.245000, -0.147500, -0.080000, 0.018750
+#*# 	-0.185000, -0.047500, 0.053750, 0.156250, 0.265000
+#*# x_count = 5
+#*# y_count = 5
+#*# mesh_x_pps = 2
+#*# mesh_y_pps = 2
+#*# algo = lagrange
+#*# tension = 0.2
+#*# min_x = 40.0
+#*# max_x = 330.0
+#*# min_y = 45.0
+#*# max_y = 330.0
 #*#
 #*# [skew_correction CaliFlower]
 #*# xy_skew = -0.001201925537756585
@@ -541,55 +554,12 @@ samples_tolerance_retries: 3
 #*#
 #*# [input_shaper]
 #*# shaper_type_x = mzv
-#*# shaper_freq_x = 50.2
+#*# shaper_freq_x = 46.4
 #*# shaper_type_y = mzv
-#*# shaper_freq_y = 38.8
+#*# shaper_freq_y = 36.6
 #*#
 #*# [extruder]
 #*# control = pid
-#*# pid_kp = 24.203
-#*# pid_ki = 1.598
-#*# pid_kd = 91.666
-#*#
-#*# [bed_mesh preheatsoack]
-#*# version = 1
-#*# points =
-#*# 	0.001991, -0.007384, 0.064491, 0.058241, 0.071991
-#*# 	-0.048009, -0.054259, -0.014884, 0.006366, -0.006134
-#*# 	-0.031759, -0.066759, -0.018634, -0.029259, -0.027384
-#*# 	-0.016134, -0.034259, 0.011991, -0.003009, 0.005741
-#*# 	0.058866, 0.060116, 0.081366, 0.081991, 0.089491
-#*# x_count = 5
-#*# y_count = 5
-#*# mesh_x_pps = 2
-#*# mesh_y_pps = 2
-#*# algo = lagrange
-#*# tension = 0.2
-#*# min_x = 40.0
-#*# max_x = 330.0
-#*# min_y = 45.0
-#*# max_y = 330.0
-#*#
-#*# [bed_mesh newer warming up]
-#*# version = 1
-#*# points =
-#*# 	-0.031759, -0.038009, 0.039491, 0.038241, 0.055741
-#*# 	-0.096759, -0.091134, -0.048009, -0.028009, -0.035509
-#*# 	-0.083634, -0.111759, -0.057384, -0.068009, -0.065509
-#*# 	-0.063009, -0.077384, -0.024884, -0.039884, -0.029884
-#*# 	0.028241, 0.032616, 0.058241, 0.062616, 0.070741
-#*# x_count = 5
-#*# y_count = 5
-#*# mesh_x_pps = 2
-#*# mesh_y_pps = 2
-#*# algo = lagrange
-#*# tension = 0.2
-#*# min_x = 40.0
-#*# max_x = 330.0
-#*# min_y = 45.0
-#*# max_y = 330.0
-#*#
-#*# [skew_correction Califlower]
-#*# xy_skew = -0.0017985656259095195
-#*# xz_skew = 0.0
-#*# yz_skew = 0.0
+#*# pid_kp = 22.763
+#*# pid_ki = 1.445
+#*# pid_kd = 89.628
